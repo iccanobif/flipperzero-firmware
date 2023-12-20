@@ -302,6 +302,8 @@ int32_t music_player_app(void* p) {
     FuriString* file_path;
     file_path = furi_string_alloc();
 
+    furi_string_set(file_path, STORAGE_APP_DATA_PATH_PREFIX);
+
     do {
         if(p && strlen(p)) {
             furi_string_set(file_path, (const char*)p);
@@ -310,8 +312,6 @@ int32_t music_player_app(void* p) {
             storage_common_migrate(
                 storage, EXT_PATH("music_player"), STORAGE_APP_DATA_PATH_PREFIX);
             furi_record_close(RECORD_STORAGE);
-
-            furi_string_set(file_path, STORAGE_APP_DATA_PATH_PREFIX);
 
             DialogsFileBrowserOptions browser_options;
             dialog_file_browser_set_basic_options(
